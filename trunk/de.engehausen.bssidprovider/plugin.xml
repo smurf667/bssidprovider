@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" id="de.engehausen.bssidprovider" version="0.1">
+
+	<name>BSSID Provider</name>
+
+	<description>This Cordova plug-in provides the BSSID (MAC address) of an existing Wifi connection.</description>
+
+	<license>GNU GENERAL PUBLIC LICENSE v3</license>
+
+	<engines>
+		<engine name="cordova" version=">=3.5.0" />
+	</engines>
+
+	<js-module name="BssidProvider" src="www/BssidProvider.js">
+		<clobbers target="window.plugins.BssidProvider" />
+	</js-module>
+
+	<platform name="ios">
+
+		<config-file target="config.xml" parent="/*">
+			<feature name="BssidProvider">
+				<param name="ios-package" value="BssidProvider" />
+			</feature>
+		</config-file>
+		<header-file src="src/ios/BssidProvider.h" />
+		<source-file src="src/ios/BssidProvider.m" />
+		
+		<framework src="SystemConfiguration.framework"/>
+				
+	</platform>
+
+	<platform name="android">
+	
+		<config-file target="res/xml/config.xml" parent="/*">
+			<feature name="BssidProvider">
+				<param name="android-package" value="de.engehausen.bssidprovider.BssidProvider" />
+			</feature>
+		</config-file>
+		<config-file target="AndroidManifest.xml" parent="/*">
+			<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+		</config-file>
+		
+		<source-file src="src/android/de/engehausen/bssidprovider/BssidProvider.java" target-dir="src/de/engehausen/bssidprovider"/>
+
+	</platform>
+
+</plugin>
